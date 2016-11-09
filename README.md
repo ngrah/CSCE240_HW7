@@ -10,10 +10,17 @@
 
 ## Suggested Reading
 
-- [Git Textbook](https://git-scm.com/book/en/v2)
-- [Chromium Source Code](https://chromium.googlesource.com/chromium/src.git/+/master)
+### [Git Textbook](https://git-scm.com/book/en/v2)
 
-(Don't read the entire Chromium Source Code; it's just a good style example to go by if you've been having difficulty with documentation or style)
+Familiarize yourself with [3. Branching](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell) and [5.2 Contributing to a Project](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project). For your convenience, [2. Git Basics](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository) is also recomended.
+
+### [Git Cheat Sheet](https://www.linux.com/learn/your-real-world-git-cheat-sheet)
+
+This is intended as a quick reference, not a substitute for the text. If you're short on time, though, it will suffice as a substitute for the text as well.
+
+### [Chromium Source Code](https://chromium.googlesource.com/chromium/src.git/+/master)
+
+Don't read the entire Chromium Source Code; it's just a good style example to go by if you've been having difficulty with documentation or style.
 
 ## Contributing 
 
