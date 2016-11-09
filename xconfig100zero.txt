@@ -1,0 +1,30 @@
+35 13  105 50 5000 30 3
+0.0 10.0 10.0 10.0  5.0  5.0  5.0 10.0 10.0  5.0  5.0  5.0 10.0 10.0
+
+ 0  0.0
+ 6 10.0
+ 7 10.0
+ 8 10.0
+ 9  5.0
+10  5.0
+11  5.0
+12 10.0
+ 1 10.0
+ 2  5.0
+ 3  5.0
+ 4  5.0
+ 5 10.0
+ 6 10.0
+
+LINE ONE
+RN_seed
+number of hours in election day
+time to vote mean used for estimating min number of stations
+minimum number of voters per pct for this simulation
+maximum number of voters per pct for this simulation
+waiting time (minutes) considered "too long"
+number of iterations to perform
+
+LINE TWO
+percent at time zero (one number)
+pct arrival percentages per hour (13 numbers)
