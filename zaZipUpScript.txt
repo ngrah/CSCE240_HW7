@@ -1,0 +1,29 @@
+#!/bin/bash
+echo "Remove the old 'assignment' directory"
+rm -r assignment
+echo "Create a new 'assignment' directory"
+mkdir assignment
+#
+echo "Descend into 'mydirectory' directory"
+cd mydirectory
+#
+for item in *
+do
+    echo "Descend into directory" $item
+    cd $item
+    echo "Execute 'uname' to verify system"
+    uname -a > SystemUNAME.txt
+    echo "Return from directory" $item
+    cd ..
+    echo "tar directory" $item
+    tar -cvf tarfile$item $item
+    echo "gzip directory" $item
+    gzip tarfile$item
+    echo "cp gzipped file to 'assignment'"
+    cp tarfile$item.gz ../assignment
+    echo "rm the gzipped file from " $item
+    rm tarfile$item.gz
+done
+#
+echo "Return from 'mydirectory' directory"
+cd ..
