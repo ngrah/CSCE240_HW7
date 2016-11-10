@@ -9,9 +9,9 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "../Utilities/utils.h"
-#include "../Utilities/scanner.h"
-#include "../Utilities/scanline.h"
+#include "../../Utilities/utils.h"
+#include "../../Utilities/scanner.h"
+#include "../../Utilities/scanline.h"
 
 using namespace std;
 

@@ -12,9 +12,9 @@
 #include <set>
 #include <vector>
 
-#include "../Utilities/utils.h"
-#include "../Utilities/scanner.h"
-#include "../Utilities/scanline.h"
+#include "../../Utilities/utils.h"
+#include "../../Utilities/scanner.h"
+#include "../../Utilities/scanline.h"
 
 #include "myrandom.h"
 
