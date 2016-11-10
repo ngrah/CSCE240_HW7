@@ -3,7 +3,7 @@
 ## Members
 
 - Hadrian Buckner (hbuckner)
-- Nicholas Grah
+- Nicholas Grah (ngrah)
 - Brian Griffin
 - Peter Sanders (hxtk)
 - Tahir Warid
