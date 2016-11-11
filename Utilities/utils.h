@@ -94,6 +94,11 @@ class Utils {
   static std::string Format(const double value, const int width,
                             const int precision);
 
+  // This is a function to print a string to two different outputs
+  // Accepts a string to be printed followed by the two streams
+  // it should be printed to.
+  // It is the responsibility of the calling context to ensure
+  // the streams are flushed and to close the streams as needed.
   static void Output(
       const std::string& out_string,
       std::ostream& stream1, std::ostream& stream2);
