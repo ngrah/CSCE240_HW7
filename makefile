@@ -1,4 +1,4 @@
-GPP = g++ -O3 -Wall -std=c++11
+GPP = g++ -g -Wall -Wextra -std=c++11
 UTILS = ../../Utilities
 SCANNER = ../../Utilities
 SCANLINE = ../../Utilities
