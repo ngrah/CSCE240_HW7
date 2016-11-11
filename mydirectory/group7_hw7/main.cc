@@ -9,8 +9,7 @@
 
 static const string kTag = "MAIN: ";
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   string config_filename;
   string pct_filename = "XX";
   string log_filename = "XX";
@@ -28,9 +27,10 @@ int main(int argc, char *argv[])
 
   MyRandom random;
 
-  cout<< kTag << "Beginning execution" << endl;
+  cout << kTag << "Beginning execution" << endl;
 
-  Utils::CheckArgs(4, argc, argv, "configfilename pctfilename outfilename logfilename");
+  Utils::CheckArgs(4, argc, argv,
+                   "configfilename pctfilename outfilename logfilename");
   config_filename = static_cast<string>(argv[1]);
   pct_filename = static_cast<string>(argv[2]);
   out_filename = static_cast<string>(argv[3]);
@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
   Utils::FileClose(out_stream);
   Utils::FileClose(Utils::log_stream);
 
-  cout<< kTag << "Ending execution" << endl;
+  cout << kTag << "Ending execution" << endl;
 
   return 0;
 }

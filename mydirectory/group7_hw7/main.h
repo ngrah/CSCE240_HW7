@@ -9,14 +9,14 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "../../Utilities/utils.h"
-#include "../../Utilities/scanner.h"
 #include "../../Utilities/scanline.h"
+#include "../../Utilities/scanner.h"
+#include "../../Utilities/utils.h"
 
 using namespace std;
 
 #include "configuration.h"
-#include "simulation.h"
 #include "myrandom.h"
+#include "simulation.h"
 
-#endif // MAIN_H
+#endif  // MAIN_H

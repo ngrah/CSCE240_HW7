@@ -11,42 +11,41 @@
 
 #include <map>
 
-#include "../../Utilities/utils.h"
-#include "../../Utilities/scanner.h"
 #include "../../Utilities/scanline.h"
+#include "../../Utilities/scanner.h"
+#include "../../Utilities/utils.h"
 
 using namespace std;
 
 #include "configuration.h"
 #include "onepct.h"
 
-class Simulation
-{
-public:
-/****************************************************************
- * Constructors and destructors for the class. 
-**/
+class Simulation {
+ public:
+  /****************************************************************
+   * Constructors and destructors for the class.
+  **/
   Simulation();
   virtual ~Simulation();
 
-/****************************************************************
- * General functions.
-**/
+  /****************************************************************
+   * General functions.
+  **/
   void ReadPrecincts(Scanner& infile);
-  void RunSimulation(const Configuration& config,
-                     MyRandom& random, ofstream& out_stream);
+  void RunSimulation(const Configuration& config, MyRandom& random,
+                     ofstream& out_stream);
   string ToString();
   string ToStringPcts();
 
-private:
-/****************************************************************
- * Variables.
-**/
+ private:
+  /****************************************************************
+   * Variables.
+  **/
   map<int, OnePct> pcts_;
 
-/****************************************************************
- * Private functions.
-**/
+  /****************************************************************
+   * Private functions.
+  **/
 };
 
-#endif // SIMULATION_H
+#endif  // SIMULATION_H

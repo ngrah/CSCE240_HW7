@@ -10,13 +10,11 @@ std::stringstream Utils::ss;
 /****************************************************************
  * Constructor.
 **/
-Utils::Utils() {
-}
+Utils::Utils() {}
 /****************************************************************
  * Destructor.
 **/
-Utils::~Utils() {
-}
+Utils::~Utils() {}
 
 /****************************************************************
  * General functions.
@@ -31,11 +29,10 @@ Utils::~Utils() {
  *   usage - the 'usage' message to display on error
  * Return: none
 **/
-void Utils::CheckArgs(const int howMany, const int argc,
-                      char *argv[], const std::string usage) {
-  if(argc != howMany + 1)
-  {
-//    std::cout << kTag << "incorrect argument count\n";
+void Utils::CheckArgs(const int howMany, const int argc, char* argv[],
+                      const std::string usage) {
+  if (argc != howMany + 1) {
+    //    std::cout << kTag << "incorrect argument count\n";
     std::cout << kTag << "usage: " << argv[0] << " " << usage << std::endl;
     exit(1);
   }
@@ -76,19 +73,16 @@ void Utils::FileClose(std::ofstream& out_stream) {
  * Return: none
 **/
 bool Utils::FileDoesExist(std::string filename) {
-  bool return_value = false; // default is that the file does not exist
+  bool return_value = false;  // default is that the file does not exist
   std::ifstream in_stream;
 
   std::cout << kTag << "test existence of input file '" << filename << "'\n";
   in_stream.open(filename.c_str());
-  if(in_stream.fail())
-  {
+  if (in_stream.fail()) {
     std::cout << kTag << "open failed for '" << filename << "'\n";
     return_value = false;
     in_stream.close();
-  }
-  else
-  {
+  } else {
     std::cout << kTag << "open succeeded for '" << filename << "'\n";
     return_value = true;
     in_stream.close();
@@ -106,19 +100,16 @@ bool Utils::FileDoesExist(std::string filename) {
  * Return: none
 **/
 bool Utils::FileDoesNotExist(std::string filename) {
-  bool return_value = true; // default is that the file does not exist
+  bool return_value = true;  // default is that the file does not exist
   std::ifstream in_stream;
 
   std::cout << kTag << "test nonexistence of input file '" << filename << "'\n";
   in_stream.open(filename.c_str());
-  if(in_stream.fail())
-  {
+  if (in_stream.fail()) {
     std::cout << kTag << "file '" << filename << "' does not exist\n";
     return_value = true;
     in_stream.close();
-  }
-  else
-  {
+  } else {
     std::cout << kTag << "file '" << filename << "' does indeed exist\n";
     return_value = false;
     in_stream.close();
@@ -138,8 +129,7 @@ bool Utils::FileDoesNotExist(std::string filename) {
 void Utils::FileOpen(std::ifstream& in_stream, std::string filename) {
   std::cout << kTag << "open the input file '" << filename << "'\n";
   in_stream.open(filename.c_str());
-  if(in_stream.fail())
-  {
+  if (in_stream.fail()) {
     std::cout << kTag << "open failed for '" << filename << "'\n";
     exit(0);
   }
@@ -157,8 +147,7 @@ void Utils::FileOpen(std::ifstream& in_stream, std::string filename) {
 void Utils::FileOpen(std::ofstream& out_stream, std::string filename) {
   std::cout << kTag << "open the output file '" << filename << "'\n";
   out_stream.open(filename.c_str());
-  if(out_stream.fail())
-  {
+  if (out_stream.fail()) {
     std::cout << kTag << "open failed for '" << filename << "'\n";
     exit(0);
   }
@@ -176,8 +165,7 @@ void Utils::FileOpen(std::ofstream& out_stream, std::string filename) {
 void Utils::LogFileOpen(std::string filename) {
   std::cout << kTag << "open the logfile '" << filename << "'\n";
   log_stream.open(filename.c_str());
-  if(log_stream.fail())
-  {
+  if (log_stream.fail()) {
     std::cout << kTag << "open failed for '" << filename << "'\n";
     exit(0);
   }
@@ -187,15 +175,15 @@ void Utils::LogFileOpen(std::string filename) {
 /****************************************************************
  * These are the overloaded formatting functions that all return
  * a 'string' value after having formatted the first argument.
- * 
- * We have the following formatting:
- *   'char*' to a 'string' 
- *   'char*' to a 'string' of 'width' (default right) 
- *   'char*' to a 'string' of 'width' (left or right, default right) 
  *
- *   'string' to a 'string' 
- *   'string' to a 'string' of 'width' (default right) 
- *   'string' to a 'string' of 'width' (left or right, default right) 
+ * We have the following formatting:
+ *   'char*' to a 'string'
+ *   'char*' to a 'string' of 'width' (default right)
+ *   'char*' to a 'string' of 'width' (left or right, default right)
+ *
+ *   'string' to a 'string'
+ *   'string' to a 'string' of 'width' (default right)
+ *   'string' to a 'string' of 'width' (left or right, default right)
  *
  *   'short'     to a 'string'
  *   'short'     to a 'string' of 'width'
@@ -253,18 +241,13 @@ std::string Utils::Format(const char* value, const int width,
                           const std::string justify) {
   Utils::oss.str("");
 
-  if("left" == justify)
-  {
+  if ("left" == justify) {
     Utils::oss.setf(std::ios::left, std::ios::adjustfield);
     Utils::oss << std::setw(width) << std::string(value);
-  }
-  else if("right" == justify)
-  {
+  } else if ("right" == justify) {
     Utils::oss.setf(std::ios::right, std::ios::adjustfield);
     Utils::oss << std::setw(width) << std::string(value);
-  }
-  else
-  {
+  } else {
     Utils::oss << std::setw(width) << std::string(value);
   }
   return oss.str();
@@ -278,9 +261,7 @@ std::string Utils::Format(const char* value, const int width,
  *   value - the 'string' variable to be converted and formatted.
  * Return: the string-ified version of 'value'
 **/
-std::string Utils::Format(const std::string value) {
-  return value;
-}
+std::string Utils::Format(const std::string value) { return value; }
 
 /****************************************************************
  * String-ify a string, with width formatting but without
@@ -310,18 +291,13 @@ std::string Utils::Format(const std::string value, const int width) {
 std::string Utils::Format(const std::string value, const int width,
                           const std::string justify) {
   Utils::oss.str("");
-  if("left" == justify)
-  {
+  if ("left" == justify) {
     Utils::oss.setf(std::ios::left, std::ios::adjustfield);
     Utils::oss << std::setw(width) << value;
-  }
-  else if("right" == justify)
-  {
+  } else if ("right" == justify) {
     Utils::oss.setf(std::ios::right, std::ios::adjustfield);
     Utils::oss << std::setw(width) << value;
-  }
-  else
-  {
+  } else {
     Utils::oss << std::setw(width) << value;
   }
   return oss.str();
@@ -488,7 +464,7 @@ std::string Utils::Format(const double value, const int width) {
  * specified precision.
  *
  * With precision specified, we have a fixed location for the
- * decimal point and thus we should justify on the right. 
+ * decimal point and thus we should justify on the right.
  *
  * Parameters:
  *   value - the 'double' variable to be converted and formatted.
@@ -506,10 +482,18 @@ std::string Utils::Format(const double value, const int width,
   return returnString;
 }
 
+void Utils::Output(
+    const std::string& out_string,
+    std::ostream& stream1,
+    std::ostream& stream2) {
+  stream1 << out_string;
+  stream2 << out_string;
+}
+
 /****************************************************************
  * Replace blanks with another character.
  * This is to allow using an underscore to make a string one string
- * instead of having embedded blanks. 
+ * instead of having embedded blanks.
  *
  * Parameters:
  *   what - the input 'string' to trim blanks from
@@ -522,8 +506,7 @@ std::string Utils::ReplaceBlanks(std::string input, char c) {
   return_value = input;
 
   std::string::size_type pos = return_value.find(" ");
-  while(pos != std::string::npos)
-  {
+  while (pos != std::string::npos) {
     return_value[pos] = c;
     pos = return_value.find(" ");
   }
@@ -544,36 +527,35 @@ int Utils::StringToInteger(std::string input) {
   int return_value = 0;
   const std::string digits = "0123456789";
 
-//  Utils::log_stream << kTag << "string '" << input << "'\n";
-//  Utils::log_stream.flush();
+  //  Utils::log_stream << kTag << "string '" << input << "'\n";
+  //  Utils::log_stream.flush();
   is_negative = false;
-  if("-" == input.substr(0,1))
-  { 
-//    Utils::log_stream << kTag << "negative '" << input.substr(0,1) << "'\n";
-//    Utils::log_stream.flush();
+  if ("-" == input.substr(0, 1)) {
+    //    Utils::log_stream << kTag << "negative '" << input.substr(0,1) <<
+    //    "'\n";
+    //    Utils::log_stream.flush();
     is_negative = true;
     input = input.substr(1);
   }
-//  Utils::log_stream << kTag << "now pos '" << input << "'\n";
-//  Utils::log_stream.flush();
+  //  Utils::log_stream << kTag << "now pos '" << input << "'\n";
+  //  Utils::log_stream.flush();
 
-  for(std::string::iterator iter = input.begin(); iter != input.end(); ++iter)
-  {
+  for (std::string::iterator iter = input.begin(); iter != input.end();
+       ++iter) {
     int digit = digits.find(*iter);
-    if((0 > digit) || (9 < digit))
-    {
+    if ((0 > digit) || (9 < digit)) {
       Utils::log_stream << kTag << "ERROR: string '" << input
-                       << "' not a number\n";
+                        << "' not a number\n";
       Utils::log_stream.flush();
       exit(0);
     }
-    return_value = 10*return_value + digit;
+    return_value = 10 * return_value + digit;
   }
 
-  if(is_negative) return_value = -return_value;
+  if (is_negative) return_value = -return_value;
 
   return return_value;
-} // int Utils::StringToInteger(string input)
+}  // int Utils::StringToInteger(string input)
 
 /****************************************************************
  * Convert a string to a LONG.
@@ -587,21 +569,20 @@ LONG Utils::StringToLONG(std::string input) {
   LONG return_value = 0L;
   const std::string digits = "0123456789";
 
-  for(std::string::iterator iter = input.begin(); iter != input.end(); ++iter)
-  {
+  for (std::string::iterator iter = input.begin(); iter != input.end();
+       ++iter) {
     int digit = digits.find(*iter);
-    if((0 > digit) || (9 < digit))
-    {
+    if ((0 > digit) || (9 < digit)) {
       Utils::log_stream << kTag << "ERROR: string '" << input
-                       << "' not a number\n";
+                        << "' not a number\n";
       Utils::log_stream.flush();
       exit(0);
     }
-    return_value = 10*return_value + digit;
+    return_value = 10 * return_value + digit;
   }
 
   return return_value;
-} // LONG Utils::StringToLONG(std::string input)
+}  // LONG Utils::StringToLONG(std::string input)
 
 /****************************************************************
  * Call the timing function
@@ -626,15 +607,14 @@ std::string Utils::TimeCall(const std::string timestring, double& timeNew) {
   char s[160];
   std::string return_value;
   static bool firsttime = true;
-  static double usercurrent = 0.0,userone = 0.0,usertwo = 0.0;
-  static double systemcurrent = 0.0,systemone = 0.0,systemtwo = 0.0;
-  static double cpupctone,cpupcttwo;
-  static double TIMEsystemtotal,TIMEusertotal;
+  static double usercurrent = 0.0, userone = 0.0, usertwo = 0.0;
+  static double systemcurrent = 0.0, systemone = 0.0, systemtwo = 0.0;
+  static double cpupctone, cpupcttwo;
+  static double TIMEsystemtotal, TIMEusertotal;
   static struct rusage rusage;
-  static time_t TIMEtcurrent,TIMEtone,TIMEttotal = 0.0,TIMEttwo;
+  static time_t TIMEtcurrent, TIMEtone, TIMEttotal = 0.0, TIMEttwo;
 
-  if(firsttime)
-  {
+  if (firsttime) {
     firsttime = false;
     TIMEusertotal = 0.0;
     TIMEsystemtotal = 0.0;
@@ -642,12 +622,12 @@ std::string Utils::TimeCall(const std::string timestring, double& timeNew) {
     TIMEttwo = time(0);
   }
 
-  getrusage(RUSAGE_SELF,&rusage);
+  getrusage(RUSAGE_SELF, &rusage);
 
-  usertwo = (double) rusage.ru_utime.tv_sec;
-  usertwo += (double) rusage.ru_utime.tv_usec/1000000.0;
-  systemtwo = (double) rusage.ru_stime.tv_sec;
-  systemtwo += (double) rusage.ru_stime.tv_usec/1000000.0;
+  usertwo = (double)rusage.ru_utime.tv_sec;
+  usertwo += (double)rusage.ru_utime.tv_usec / 1000000.0;
+  systemtwo = (double)rusage.ru_stime.tv_sec;
+  systemtwo += (double)rusage.ru_stime.tv_usec / 1000000.0;
 
   usercurrent = usertwo - userone;
   systemcurrent = systemtwo - systemone;
@@ -658,45 +638,43 @@ std::string Utils::TimeCall(const std::string timestring, double& timeNew) {
   TIMEttwo = time(0);
   TIMEtcurrent = TIMEttwo - TIMEtone;
   TIMEttotal += TIMEtcurrent;
-  if(TIMEtcurrent != 0)
-  {
-    cpupctone = 100.0 * ((double)usercurrent+systemcurrent) /
-                           ((double)(TIMEtcurrent));
-    if(cpupctone > 100.0) cpupctone = 100.0;
-  }
-  else
-  {
+  if (TIMEtcurrent != 0) {
+    cpupctone = 100.0 * ((double)usercurrent + systemcurrent) /
+                ((double)(TIMEtcurrent));
+    if (cpupctone > 100.0) cpupctone = 100.0;
+  } else {
     cpupctone = 0.0;
   }
 
-  if(TIMEttotal != 0)
-  {
-    cpupcttwo = 100.0 * ((double)TIMEusertotal+TIMEsystemtotal) /
-                           ((double)(TIMEttotal));
-    if(cpupcttwo > 100.0) cpupcttwo = 100.0;
-  }
-  else
-  {
+  if (TIMEttotal != 0) {
+    cpupcttwo = 100.0 * ((double)TIMEusertotal + TIMEsystemtotal) /
+                ((double)(TIMEttotal));
+    if (cpupcttwo > 100.0) cpupcttwo = 100.0;
+  } else {
     cpupcttwo = 0.0;
   }
 
   return_value = "";
-  snprintf(s,80,"\nTIME***********************************************************************\n");
+  snprintf(s, 80,
+           "\nTIME*************************************************************"
+           "**********\n");
   return_value += std::string(s);
 
-  snprintf(s,80,"TIME CPU percent  %6.2f %6.2f                    %s",
-             cpupctone,cpupcttwo,ctime(&TIMEttwo));
+  snprintf(s, 80, "TIME CPU percent  %6.2f %6.2f                    %s",
+           cpupctone, cpupcttwo, ctime(&TIMEttwo));
   return_value += std::string(s);
 
-  snprintf(s,80,"TIME %-15s %10.2f u   %10.2f s   Res:%12ld\n",
-                 timestring.c_str(),usercurrent,systemcurrent, rusage.ru_maxrss);
+  snprintf(s, 80, "TIME %-15s %10.2f u   %10.2f s   Res:%12ld\n",
+           timestring.c_str(), usercurrent, systemcurrent, rusage.ru_maxrss);
   return_value += std::string(s);
 
-  snprintf(s,80,"TIME %-15s %10.2f u_t %10.2f s_t\n",
-                 timestring.c_str(),TIMEusertotal,TIMEsystemtotal);
+  snprintf(s, 80, "TIME %-15s %10.2f u_t %10.2f s_t\n", timestring.c_str(),
+           TIMEusertotal, TIMEsystemtotal);
   return_value += std::string(s);
 
-  snprintf(s,80,"TIME***********************************************************************\n");
+  snprintf(s, 80,
+           "TIME***************************************************************"
+           "********\n");
   return_value += std::string(s);
 
   return_value += "\n\n";
@@ -708,13 +686,13 @@ std::string Utils::TimeCall(const std::string timestring, double& timeNew) {
   timeNew = TIMEusertotal;
 
   return return_value;
-} // std::string Utils::timecall(const std::string timestring)
+}  // std::string Utils::timecall(const std::string timestring)
 
 /****************************************************************
  * Convert a string to all lowercase.
  *
  * Parameters:
- *   to - the input 'string' to convert 
+ *   to - the input 'string' to convert
  *   from - the output converted 'string'
  * Returns: none
 **/
@@ -722,12 +700,11 @@ void Utils::ToLower(std::string& to, const std::string from) {
   static char c[1024];
 
   snprintf(c, 1024, "%s", from.c_str());
-  for(UINT i = 0; i < from.length(); ++i)
-  {
-    if(isupper(c[i])) c[i] = tolower(c[i]);
+  for (UINT i = 0; i < from.length(); ++i) {
+    if (isupper(c[i])) c[i] = tolower(c[i]);
   }
   to = std::string(c);
-} // void Utils::toLower(std::string& to, const std::string from)
+}  // void Utils::toLower(std::string& to, const std::string from)
 
 /****************************************************************
  * Trim away leading and trailing blanks.
@@ -744,25 +721,22 @@ std::string Utils::TrimBlanks(std::string what) {
   return_value = what;
 
   // trim away leading blanks
-  while(" " == return_value.substr(0,1))
-  {
+  while (" " == return_value.substr(0, 1)) {
     length = return_value.length();
-    return_value = return_value.substr(1,length);
+    return_value = return_value.substr(1, length);
   }
 
   // trim away trailing blanks
-  if(!return_value.empty())
-  {
+  if (!return_value.empty()) {
     length = return_value.length();
-    while(" " == return_value.substr(length-1,1))
-    {
-      return_value = return_value.substr(0,length-1);
+    while (" " == return_value.substr(length - 1, 1)) {
+      return_value = return_value.substr(0, length - 1);
       length = return_value.length();
     }
   }
 
   return return_value;
-} // std::string Utils::trimBlanks(std::string what)
+}  // std::string Utils::trimBlanks(std::string what)
 
 /****************************************************************
  * General function for trimming whitespace from begin and end.
@@ -786,8 +760,7 @@ std::string Utils::Trim(std::string s) {
   Utils::log_stream << kTag << "found first: " << foundPos << std::endl;
   Utils::log_stream.flush();
 #endif
-  if(foundPos != std::string::npos)
-  {
+  if (foundPos != std::string::npos) {
     return_string = s.substr(foundPos);
   }
 #ifdef EBUG3
@@ -800,9 +773,8 @@ std::string Utils::Trim(std::string s) {
   Utils::log_stream << kTag << "found last:  " << foundPos << std::endl;
   Utils::log_stream.flush();
 #endif
-  if(foundPos != std::string::npos)
-  {
-    return_string = return_string.substr(0,foundPos+1);
+  if (foundPos != std::string::npos) {
+    return_string = return_string.substr(0, foundPos + 1);
   }
 #ifdef EBUG3
   Utils::log_stream << kTag << "new string:  '" << return_string << "'\n";
@@ -810,5 +782,4 @@ std::string Utils::Trim(std::string s) {
 #endif
 
   return return_string;
-} // std::string Utils::Trim(std::string s)
-
+}  // std::string Utils::Trim(std::string s)
