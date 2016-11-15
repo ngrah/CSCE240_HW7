@@ -2,11 +2,11 @@
 
 ## Members
 
-- Hadrian Buckner (hbuckner)
-- Nicholas Grah (ngrah)
-- Brian Griffin (WhiteBread1)
-- Peter Sanders (hxtk)
-- Tahir Warid
+- Hadrian Buckner (@hbuckner)
+- Nicholas Grah (@ngrah)
+- Brian Griffin (@WhiteBread1)
+- Peter Sanders (@hxtk)
+- Tahir Warid (@fruityfruit)
 
 ## Suggested Reading
 
