@@ -1,4 +1,6 @@
+# NOTE: debugging is enabled and optimization is disabled
 GPP = g++ -g -Wall -Wextra -std=c++11
+
 UTILS = ../../Utilities
 SCANNER = ../../Utilities
 SCANLINE = ../../Utilities
