@@ -7,7 +7,7 @@ do
   echo " "
   echo "EXECUTING" $item
   cd $item
-  ./Aprog ../../xconfig100zero.txt ../../xpctfile.txt zzout zzlog >zzstdout0013
+  ./Aprog ../../xconfig100zero.txt ../../xpctfile.txt ../../dataallsorted.txt zzout zzlog >zzstdout0013
   cd ..
 echo "EXECUTION COMPLETE"
 done

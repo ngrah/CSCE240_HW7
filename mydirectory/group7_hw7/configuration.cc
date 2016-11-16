@@ -32,7 +32,7 @@ int Configuration::GetMaxServiceSubscript() const {
 **/
 /****************************************************************
 **/
-void Configuration::ReadConfiguration(Scanner& instream) {
+void Configuration::ReadConfiguration(Scanner& instream, Scanner& data_stream) {
   /*
   */
   string line;
@@ -57,11 +57,8 @@ void Configuration::ReadConfiguration(Scanner& instream) {
     arrival_fractions_.push_back(input);
   }
 
-  Scanner service_times_file;
-  // TODO(hxtk): document or remove hard-coded filename
-  service_times_file.OpenFile("../../dataallsorted.txt");
-  while (service_times_file.HasNext()) {
-    int thetime = service_times_file.NextInt();
+  while (data_stream.HasNext()) {
+    int thetime = data_stream.NextInt();
     actual_service_times_.push_back(thetime);
   }
 }

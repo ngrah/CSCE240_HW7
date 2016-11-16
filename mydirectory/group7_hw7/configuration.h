@@ -55,7 +55,7 @@ class Configuration {
   **/
 
   int GetMaxServiceSubscript() const;
-  void ReadConfiguration(Scanner& instream);
+  void ReadConfiguration(Scanner& instream, Scanner& data_stream);
   string ToString();
 
  private:
