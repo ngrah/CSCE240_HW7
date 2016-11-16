@@ -98,7 +98,7 @@ void OnePct::CreateVoters(const Configuration& config, MyRandom& random,
 
     int arrival = hour * 3600;
     for (int voter = 0; voter < voters_this_hour; ++voter) {
-      double lambda = static_cast<double>(voters_this_hour / 3600.0);
+      double lambda = static_cast<double>(voters_this_hour) / 3600.0;
       int interarrival = random.RandomExponentialInt(lambda);
       arrival += interarrival;
       int durationsub =
