@@ -1,0 +1,20 @@
+#!/bin/bash
+echo "Descend into 'testdirectory' directory"
+cd testdirectory
+#
+for item in *
+do
+  echo " "
+  echo "COMPILING" $item
+  cd $item
+  rm *.o
+  rm Aprog
+  make -f ../../makefile
+  cd ..
+done
+echo "Return from 'testdirectory' directory"
+cd ..
+#
+echo " "
+echo "COMPILING COMPLETE"
+echo " "

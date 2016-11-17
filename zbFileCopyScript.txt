@@ -1,0 +1,27 @@
+#!/bin/bash
+echo "Remove the old 'testdirectory' directory"
+rm -r testdirectory
+echo "Create a new 'testdirectory' directory"
+mkdir testdirectory
+echo "cp all the submissions from 'assignment' into 'testdirectory'"
+cp assignment/* testdirectory
+#
+echo "Descend into 'testdirectory' directory"
+cd testdirectory
+#
+for item in *
+do
+    gunzip $item
+done
+#
+for item in *
+do
+    echo "untar directory" $item
+    tar -xvf $item
+done
+#
+echo "Remove the tar files"
+rm tar*
+#
+echo "Return from 'testdirectory' directory"
+cd ..

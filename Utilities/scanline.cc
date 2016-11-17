@@ -6,22 +6,20 @@ using namespace std;
 
 // ifstream Utils::inStream; // deprecated
 // ofstream Utils::outStream; // deprecated
-//ofstream ScanLine::zorklogStream;
-//ostringstream ScanLine::zorkoss;
-//stringstream ScanLine::zorkss;
+// ofstream ScanLine::zorklogStream;
+// ostringstream ScanLine::zorkoss;
+// stringstream ScanLine::zorkss;
 
-//stringstream ScanLine::myss;
+// stringstream ScanLine::myss;
 
 /****************************************************************
  * Constructor.
 **/
-ScanLine::ScanLine() {
-}
+ScanLine::ScanLine() {}
 /****************************************************************
  * Destructor.
 **/
-ScanLine::~ScanLine() {
-}
+ScanLine::~ScanLine() {}
 
 /****************************************************************
  * General functions.
@@ -38,19 +36,19 @@ bool ScanLine::HasMoreData() {
   Utils::logStream << TAG << "enter HasMoreData" << std::endl;
   Utils::logStream.flush();
 #endif
-  
-  if(scanline_ss_.eof())
-  {
+
+  if (scanline_ss_.eof()) {
     return_value = false;
   }
 
 #ifdef EBUGS
-  Utils::logStream << TAG << "leave HasMoreData '" << return_value << "'" << std::endl;
+  Utils::logStream << TAG << "leave HasMoreData '" << return_value << "'"
+                   << std::endl;
   Utils::logStream.flush();
 #endif
 
   return return_value;
-} 
+}
 
 /****************************************************************
  * Function 'HasNext'.
@@ -64,19 +62,19 @@ bool ScanLine::HasNext() {
   Utils::logStream << TAG << "enter HasNext" << std::endl;
   Utils::logStream.flush();
 #endif
-  
-  if(scanline_ss_.eof())
-  {
+
+  if (scanline_ss_.eof()) {
     return_value = false;
   }
 
 #ifdef EBUGS
-  Utils::logStream << TAG << "leave HasNext '" << return_value << "'" << std::endl;
+  Utils::logStream << TAG << "leave HasNext '" << return_value << "'"
+                   << std::endl;
   Utils::logStream.flush();
 #endif
 
   return return_value;
-} 
+}
 
 /****************************************************************
  * Initialization. This because I can't make constructors work.
@@ -88,7 +86,7 @@ void ScanLine::OpenString(std::string line) {
   Utils::logStream << TAG << "enter OpenString '" << line << "'" << std::endl;
   Utils::logStream.flush();
 #endif
-  
+
   scanline_ss_.clear();
   scanline_ss_.str(line);
 
@@ -96,7 +94,7 @@ void ScanLine::OpenString(std::string line) {
   Utils::logStream << TAG << "leave OpenString" << std::endl;
   Utils::logStream.flush();
 #endif
-} 
+}
 
 /****************************************************************
  * Function 'Next' to return the next string.
@@ -115,10 +113,9 @@ string ScanLine::Next() {
   Utils::logStream << TAG << "enter next" << std::endl;
   Utils::logStream.flush();
 #endif
-  
+
   token = "";
-  if(!scanline_ss_.eof())
-  {
+  if (!scanline_ss_.eof()) {
     scanline_ss_ >> token;
   }
 
@@ -128,7 +125,7 @@ string ScanLine::Next() {
 #endif
 
   return token;
-} 
+}
 
 /****************************************************************
  * Function 'NextDouble' to return the next integer.
@@ -146,19 +143,19 @@ double ScanLine::NextDouble() {
   Utils::logStream << TAG << "enter NextDouble" << std::endl;
   Utils::logStream.flush();
 #endif
-  
-  if(!scanline_ss_.eof())
-  {
+
+  if (!scanline_ss_.eof()) {
     scanline_ss_ >> local_double;
   }
 
 #ifdef EBUGS
-  Utils::logStream << TAG << "leave NextDouble '" << nextValue << "'" << std::endl;
+  Utils::logStream << TAG << "leave NextDouble '" << nextValue << "'"
+                   << std::endl;
   Utils::logStream.flush();
 #endif
 
   return local_double;
-} 
+}
 
 /****************************************************************
  * Function 'NextInt' to return the next integer.
@@ -177,11 +174,10 @@ int ScanLine::NextInt() {
   Utils::logStream << TAG << "enter NextInt" << std::endl;
   Utils::logStream.flush();
 #endif
-  
-  if(!scanline_ss_.eof())
-  {
+
+  if (!scanline_ss_.eof()) {
     scanline_ss_ >> token;
-    next_value = Utils::StringToInteger(token); 
+    next_value = Utils::StringToInteger(token);
   }
 
 #ifdef EBUGS
@@ -190,7 +186,7 @@ int ScanLine::NextInt() {
 #endif
 
   return next_value;
-} 
+}
 
 /****************************************************************
  * Function 'NextLine' to return the rest of the line.
@@ -213,14 +209,11 @@ string ScanLine::NextLine() {
   Utils::logStream << TAG << "enter NextLine" << std::endl;
   Utils::logStream.flush();
 #endif
-  
-  if (scanline_ss_.eof())
-  {
+
+  if (scanline_ss_.eof()) {
     token = "";
-  }
-  else
-  {
-    scanline_ss_.getline(xx,1024);
+  } else {
+    scanline_ss_.getline(xx, 1024);
     token = string(xx);
   }
 
@@ -230,7 +223,7 @@ string ScanLine::NextLine() {
 #endif
 
   return token;
-} 
+}
 
 /****************************************************************
  * Function 'nextLONG' to return the next LONG.
@@ -249,20 +242,20 @@ LONG ScanLine::NextLONG() {
   Utils::logStream << TAG << "enter NextLONG" << std::endl;
   Utils::logStream.flush();
 #endif
-  
-  if(!scanline_ss_.eof())
-  {
+
+  if (!scanline_ss_.eof()) {
     scanline_ss_ >> token;
-    next_value = Utils::StringToLONG(token); 
+    next_value = Utils::StringToLONG(token);
   }
 
 #ifdef EBUGS
-  Utils::logStream << TAG << "leave NextLONG '" << next_value << "'" << std::endl;
+  Utils::logStream << TAG << "leave NextLONG '" << next_value << "'"
+                   << std::endl;
   Utils::logStream.flush();
 #endif
 
   return next_value;
-} 
+}
 
 /****************************************************************
  * Test function to read.
@@ -274,7 +267,7 @@ void ScanLine::zork()
   Utils::logStream << TAG << "enter zork" << endl;
   Utils::logStream.flush();
 #endif
-  
+
 // while(!scanLineSS.eof())
   while(this->hasNext())
   {
@@ -289,6 +282,5 @@ void ScanLine::zork()
   Utils::logStream << TAG << "leave zork" << endl;
   Utils::logStream.flush();
 #endif
-} 
+}
 **/
-

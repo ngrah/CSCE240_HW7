@@ -11,15 +11,15 @@
 #ifndef SCANLINE_H
 #define SCANLINE_H
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <iomanip>
-#include <cstdlib>
-#include <string>
-#include <time.h>
-#include <sys/time.h>
 #include <sys/resource.h>
+#include <sys/time.h>
+#include <time.h>
+#include <cstdlib>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <string>
 
 #include "../Utilities/utils.h"
 // #include "../Utilities/Scanner.h"
@@ -31,38 +31,37 @@ typedef unsigned int UINT;
 typedef int64_t LONG;
 
 class ScanLine {
-public:
-//  static const string WHITESPACE;
-/****************************************************************
- * Input, output, and log streams.
-**/
-//  static ofstream zorklogStream;
+ public:
+  //  static const string WHITESPACE;
+  /****************************************************************
+   * Input, output, and log streams.
+  **/
+  //  static ofstream zorklogStream;
 
-//  static stringstream zorkss;
-//  static ostringstream zorkoss;
+  //  static stringstream zorkss;
+  //  static ostringstream zorkoss;
 
- std::stringstream scanline_ss_;
+  std::stringstream scanline_ss_;
 
-/****************************************************************
- * Constructors and destructors for the class. 
-**/
- ScanLine();
- virtual ~ScanLine();
+  /****************************************************************
+   * Constructors and destructors for the class.
+  **/
+  ScanLine();
+  virtual ~ScanLine();
 
-/****************************************************************
- * General functions.
-**/
- bool HasMoreData();
- bool HasNext();
- void OpenString(std::string line);
- std::string Next();
- double NextDouble();
- int NextInt();
- LONG NextLONG();
- std::string NextLine();
+  /****************************************************************
+   * General functions.
+  **/
+  bool HasMoreData();
+  bool HasNext();
+  void OpenString(std::string line);
+  std::string Next();
+  double NextDouble();
+  int NextInt();
+  LONG NextLONG();
+  std::string NextLine();
 
-private:
-
+ private:
 };
 
-#endif // SCANLINE_H
+#endif  // SCANLINE_H

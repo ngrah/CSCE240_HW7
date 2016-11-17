@@ -29,8 +29,7 @@ MyRandom::MyRandom(unsigned seed) {
 /******************************************************************************
  * Destructor
 **/
-MyRandom::~MyRandom() {
-}
+MyRandom::~MyRandom() {}
 
 /******************************************************************************
  * Accessors and Mutators
