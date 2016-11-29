@@ -26,7 +26,6 @@ static const string kTag = "MAIN: ";
 int main(int argc, char *argv[]) {
   string config_filename = "XX";
   string pct_filename = "XX";
-  string data_filename = "XX";
   string log_filename = "XX";
   string out_filename = "XX";
   string outstring = "XX";
@@ -36,7 +35,6 @@ int main(int argc, char *argv[]) {
 
   Scanner config_stream;
   Scanner pct_stream;
-  Scanner data_stream;
 
   Configuration config;
   Simulation simulation;
@@ -47,13 +45,12 @@ int main(int argc, char *argv[]) {
 
   Utils::CheckArgs(
       5, argc, argv,
-      "configfilename pctfilename datafilename outfilename logfilename");
+      "configfilename pctfilename outfilename logfilename");
   
   config_filename = static_cast<string>(argv[1]);
   pct_filename = static_cast<string>(argv[2]);
-  data_filename = static_cast<string>(argv[3]);
-  out_filename = static_cast<string>(argv[4]);
-  log_filename = static_cast<string>(argv[5]);
+  out_filename = static_cast<string>(argv[3]);
+  log_filename = static_cast<string>(argv[4]);
 
   Utils::FileOpen(out_stream, out_filename);
   Utils::LogFileOpen(log_filename);
@@ -72,10 +69,8 @@ int main(int argc, char *argv[]) {
   // config has RN seed, station count spread, election day length
   //   and mean and dev voting time
   config_stream.OpenFile(config_filename);
-  data_stream.OpenFile(data_filename);
-  config.ReadConfiguration(config_stream, data_stream);
+  config.ReadConfiguration(config_stream);
   config_stream.Close();
-  data_stream.Close();
 
   outstring = kTag + config.ToString() + "\n";
   out_stream << outstring << endl;
