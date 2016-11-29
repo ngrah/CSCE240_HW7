@@ -22,9 +22,9 @@ This is intended as a quick reference, not a substitute for the text. If you're 
 
 Don't read the entire Chromium Source Code; it's just a good style example to go by if you've been having difficulty with documentation or style.
 
-## Contributing 
+For a specific example, see https://chromium.googlesource.com/chromium/src.git/+/master/net/socket/socket.h
 
-### What follows should be taken as a suggestion and a starting point for discussion. Nothing will be set in stone until all participants have agreed to it.
+## Contributing 
 
 Do not directly make changes to `master` branch. At the first project meeting, we will open an issue for each of the tasks that must be completed.
 
@@ -32,3 +32,4 @@ Before you begin working, comment that you are doing so on the thread for that i
 
 When you have completed work, submit a pull request describing the nature of the changes you made. Commits should be more frequent than less. Do not close the issue you were working on until the pull request is merged.
 
+Documentation should be placed in `.h` and `.cc` files. The documentation in `.h` files should detail what each function does and what the class does overall. Documentation in `.cc` files should be concerned with the implementation details.
