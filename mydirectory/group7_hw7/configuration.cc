@@ -3,6 +3,7 @@
  * Implementation for the 'Configuration' class.
  *
  * Author/copyright:  Duncan Buell. All rights reserved.
+ * Used with permission and modified by: Group 7
  * Date: 6 October 2016
 **/
 
@@ -22,6 +23,8 @@ Configuration::~Configuration() {}
  * Accessors and mutators.
 **/
 /****************************************************************
+ * Function 'GetMaxServiceSubscript'
+ * This function returns the total number of service times.
 **/
 int Configuration::GetMaxServiceSubscript() const {
   return static_cast<int>(actual_service_times_.size()) - 1;
@@ -31,6 +34,26 @@ int Configuration::GetMaxServiceSubscript() const {
  * General functions.
 **/
 /****************************************************************
+ * Function 'ReadConfiguration'
+ * This function reads two lines from the scanner containing
+ * election data.  The scanner is a parameter of the function.
+ *
+ * The first line has seven different integer values that
+ * have information regarding what is known and/or expected
+ * on election day.  The second line has the first number as
+ * the percentage of people that voted in advance, and the
+ * rest of the numbers in the line are the corresponding
+ * hour-by-hour percentages of voters that arrive on the
+ * election day.  The actual service times are read from a
+ * file and read into a public vector which are used in
+ * other functions.
+ * NOTE: These public variables can be modified so extra
+ *       care should be taken not to modify them in other
+ *       areas of the code.
+ *
+ * Parameters:
+ * Scanner& instream - A scanner containing the two lines
+ *                     of data needed for the program. 
 **/
 void Configuration::ReadConfiguration(Scanner& instream) {
   /*
@@ -67,6 +90,10 @@ void Configuration::ReadConfiguration(Scanner& instream) {
 }
 
 /****************************************************************
+ * Function 'ToString'
+ *
+ * This function returns a string with labels for the data read
+ * in the 'ReadConfiguration' function
 **/
 string Configuration::ToString() {
   string s = "\n";
