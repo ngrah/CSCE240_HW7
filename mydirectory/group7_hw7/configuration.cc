@@ -81,7 +81,6 @@ void Configuration::ReadConfiguration(Scanner& instream) {
   }
 
   Scanner service_times_file;
-  // TODO(hxtk): document or remove hard-coded filename
   service_times_file.OpenFile("../../dataallsorted.txt");
   while (service_times_file.HasNext()) {
     int thetime = service_times_file.NextInt();
