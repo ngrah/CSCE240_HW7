@@ -2,7 +2,12 @@
  * Header for the 'Main' class.
  *
  * Author/copyright:  Duncan Buell
- * Date: 6 October 2016
+ * Used/modified: Group 7
+ * Date: 2016-11-29
+ *
+ * This is a boilerplate header file for the entry point.
+ * It is responsible for including the various utilities
+ * and the classes that are used in setting up the execution.
  *
 **/
 

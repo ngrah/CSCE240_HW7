@@ -2,7 +2,21 @@
  * Main program for simulation.
  *
  * Author/copyright:  Duncan Buell. All rights reserved.
- * Date: 6 October 2016
+ * Used/modified: Group 7
+ * Date: 2016-11-29
+ *
+ * This is the entry point for the voting simulation program.
+ * It first ensures that the correct arguments were passed in.
+ *
+ * Next, Utilities opens a log file. From this point forward,
+ * primary log data shall be written to |Utils::log_stream|
+ * instead of std::cout, std::cerr, etc.
+ *
+ * Finally, execution is passed off to the Simulation class.
+ *
+ * When execution returns from the Simulation class,
+ * the streams are closed as needed and the program returns
+ * exit success.
  *
 **/
 #include "main.h"
