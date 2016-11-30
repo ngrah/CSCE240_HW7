@@ -33,7 +33,7 @@ Simulation::~Simulation() {}
  *
  * This function takes in a scanner that contains the data
  * for the precincts and their corresponding number, and then
- * puts it into a map.
+ * puts it into a map of precincts.
  *
  * Parameters:
  * Scanner& infile - A scanner passed by reference that contains
@@ -52,8 +52,9 @@ void Simulation::ReadPrecincts(Scanner& infile) {
  * Function 'RunSimulation'.
  *
  * This function iterates through each precinct in the map and
- * creates a string with a label for each precinct that it
- * simulates through.
+ * simulates the voting time for the voters in the precinct,
+ * making sure to exclude outliers.  The data is contained
+ * in a string that is written to an output stream.
  *
  * Parameters:
  * Configuration& config - The configuration information passed
