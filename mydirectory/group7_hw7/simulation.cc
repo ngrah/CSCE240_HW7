@@ -25,6 +25,20 @@ Simulation::~Simulation() {}
 
 /****************************************************************
 * General functions.
+**
+/
+
+/****************************************************************
+ * Function 'ReadPrecincts'.
+ *
+ * This function takes in a scanner that contains the data
+ * for the precincts and their corresponding number, and then
+ * puts it into a map.
+ *
+ * Parameters:
+ * Scanner& infile - A scanner passed by reference that contains
+ *                   the data for the precincts.
+ *
 **/
 void Simulation::ReadPrecincts(Scanner& infile) {
   while (infile.HasNext()) {
@@ -35,6 +49,18 @@ void Simulation::ReadPrecincts(Scanner& infile) {
 }  // void Simulation::ReadPrecincts(Scanner& infile) {
 
 /****************************************************************
+ * Function 'RunSimulation'.
+ *
+ * This function iterates through each precinct in the map and
+ * creates a string with a label for each precinct that it
+ * simulates through.
+ *
+ * Parameters:
+ * Configuration& config - The configuration information passed
+ *                         by reference.
+ * MyRandom& random - A random number generator.
+ * ofstream& out_stream - the output stream to write to.
+ *
 **/
 void Simulation::RunSimulation(const Configuration& config, MyRandom& random,
                                ofstream& out_stream) {
@@ -44,6 +70,7 @@ void Simulation::RunSimulation(const Configuration& config, MyRandom& random,
     OnePct pct = iterPct->second;
 
     int expected_voters = pct.GetExpectedVoters();
+    //This statement discards outliers in the data
     if ((expected_voters <= config.min_expected_to_simulate_) ||
         (expected_voters > config.max_expected_to_simulate_))
       continue;
