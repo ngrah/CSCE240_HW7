@@ -1,9 +1,24 @@
-#include "onepct.h"
+stall #include "onepct.h"
 /****************************************************************
 * Implementation for the 'OnePct' class.
 *
 * Author/copyright:  Duncan Buell. All rights reserved.
-* Date: 21 May 2013
+* Used/Modified: Group 7
+* Date: 30 November 2016
+*
+* This class represents a single precint in the voting simulation program.
+* The ReadPrecincts function in the Simulation class uses creates multiple 
+* instances of this class, populates them with data from the input file, 
+* and stores them in the pcts_ map for use in the simulation.
+*
+* The RunSimulation function in the Simulation class iterates through the the pcts_ map
+* of precincts.  Using the GetExpectedVoters function contained within this
+* class, the simulation determines if a precinct contains an appropriate number
+* of voters to be used in the simulation.  This number is specified in Config.
+*
+* If a precinct has an appropriate number of expected voters for the simulation,
+* the Simulation class then uses the RunSimulationPct function for that Precinct,
+* and repeats the process for the next precinct in the pcts_ map.
 *
 **/
 
@@ -15,6 +30,8 @@ static const string kTag = "OnePct: ";
 OnePct::OnePct() {}
 /****************************************************************
 * Constructor.
+* This constuctor uses the ReadData function contained within this class
+* to populate a new instance of OnePct with data from the input file.
 **/
 OnePct::OnePct(Scanner& infile) { this->ReadData(infile); }
 
@@ -28,10 +45,14 @@ OnePct::~OnePct() {}
 **/
 
 /****************************************************************
+ * Function 'GetExpectedVoters'
+ * This function returns the number of expected voters for a precinct.
 **/
 int OnePct::GetExpectedVoters() const { return pct_expected_voters_; }
 
 /****************************************************************
+ * Function 'GetPctNumber'
+ * This function returns the number assigned to a prectinct by ReadData.
 **/
 int OnePct::GetPctNumber() const { return pct_number_; }
 
@@ -39,6 +60,10 @@ int OnePct::GetPctNumber() const { return pct_number_; }
 * General functions.
 **/
 /******************************************************************************
+ * Function 'ComputeMeanAndDev'
+ * This function is called by RunSimulationPct to calculate mean and standard
+ * deviation of simulated voting times. The voting times are taken from the 
+ * instances of OneVoter in the voters_done_voting_ map. 
 **/
 void OnePct::ComputeMeanAndDev() {
   int sum_of_wait_times_seconds = 0;
@@ -67,6 +92,15 @@ void OnePct::ComputeMeanAndDev() {
 }
 
 /****************************************************************
+ * Function 'CreateVoters'
+ * This function is called by the RunSimulationPct function.
+ * This function uses the information in the configuration file and the random
+ * number generator to create instances of the OneVoter class, and insert the
+ * instances of OneVoter into the voters_backup_ map.
+ *
+ * This task is performed with two sections.  The first section generates and
+ * stores voters that were at the polling station at the time it opened.
+ * The second section generates and stores voters who arrive throughout the day.
 **/
 void OnePct::CreateVoters(const Configuration& config, MyRandom& random,
                           ofstream& out_stream) {
@@ -78,7 +112,9 @@ void OnePct::CreateVoters(const Configuration& config, MyRandom& random,
 
   voters_backup_.clear();
   sequence = 0;
-
+  
+  ////////////////////////////////////////////////////////////////////////////
+  // This creates voters who are in line when the precinct opens.
   percent = config.arrival_zero_;
   int voters_at_zero = round((percent / 100.0) * pct_expected_voters_);
   arrival = 0;
@@ -90,7 +126,9 @@ void OnePct::CreateVoters(const Configuration& config, MyRandom& random,
     voters_backup_.insert(std::pair<int, OneVoter>(arrival, one_voter));
     ++sequence;
   }
-
+  
+  ////////////////////////////////////////////////////////////////////////////
+  // This creates voters who arrive at the precinct throughout the day.
   for (int hour = 0; hour < config.election_day_length_hours_; ++hour) {
     percent = config.arrival_fractions_.at(hour);
     int voters_this_hour = round((percent / 100.0) * pct_expected_voters_);
@@ -113,7 +151,22 @@ void OnePct::CreateVoters(const Configuration& config, MyRandom& random,
 }
 
 /******************************************************************************
+ * Function 'DoStatistics'
+ * This function is called by the RunSimulationPct function after the simulation
+ * has completed and data has been collected, and returns the number of voters 
+ * who waited too long.
+ *
+ * This function creates a map to store wait times of voters done voting. 
+ * Then, this function iterates through the voters_done_voting_ map and stores
+ * the wait time for each voter in the wait_time_minutes_map.
+ * Next, this function iterates through the wait_time_minutes_map and counts how
+ * many voters waited for too long. The ComputeMeanAndDev function is then 
+ * called to compute the mean and standard deviation of the wait times in
+ * the wait_time_minutes_map. The calculated data is stored to a string 
+ * outstring passed out with the Utils Output function.
+ *
 **/
+
 int OnePct::DoStatistics(int iteration, const Configuration& config,
                          int station_count, map<int, int>& map_for_histo,
                          ofstream& out_stream) {
@@ -121,6 +174,9 @@ int OnePct::DoStatistics(int iteration, const Configuration& config,
   map<int, int> wait_time_minutes_map;
 
   /////////////////////////////////////////////////////////////////////////////
+  // This iterates through voters_done_voting_ and stores wait times in
+  // wait_times_minutes.
+  
   multimap<int, OneVoter>::iterator iter_multimap;
   for (iter_multimap = this->voters_done_voting_.begin();
        iter_multimap != this->voters_done_voting_.end(); ++iter_multimap) {
@@ -132,6 +188,9 @@ int OnePct::DoStatistics(int iteration, const Configuration& config,
   }
 
   /////////////////////////////////////////////////////////////////////////////
+  // This iterates through wait_times_minutes and determines the number of
+  // voters who waited too long
+  
   int toolongcount = 0;
   int toolongcountplus10 = 0;
   int toolongcountplus20 = 0;
@@ -148,6 +207,10 @@ int OnePct::DoStatistics(int iteration, const Configuration& config,
   }
 
   /////////////////////////////////////////////////////////////////////////////
+  // This uses ComputeMeanAndDev to calculate the mean and standard
+  // deviation of voter wait times and passes a string containing the info to
+  // Utils Output.
+  
   ComputeMeanAndDev();
   outstring = "";
   outstring +=
@@ -175,6 +238,10 @@ int OnePct::DoStatistics(int iteration, const Configuration& config,
 }
 
 /****************************************************************
+ * Function 'ReadData'
+ * This function reads from the input file and uses the data to provide values 
+ * for the private variables in an instance of OnePct.
+ *
 **/
 void OnePct::ReadData(Scanner& infile) {
   if (infile.HasNext()) {
@@ -197,6 +264,16 @@ void OnePct::ReadData(Scanner& infile) {
 }  // void OnePct::ReadData(Scanner& infile)
 
 /****************************************************************
+ * Function 'RunSimulationPct'
+ * This function is called by the Simulation class for each instance of OnePct.
+ *
+ * This function begins by calculation the max station count and min station 
+ * count for the precinct based on expected voters.  Then, CreateVoters is 
+ * called for this instance of OnePct. Next, RunSimulationPct2 is called for 
+ * this instance of OnePct to simulate the line management and voting station 
+ * usage associated with the voting process and store the generated data. 
+ * Lastly, the histogram of voting data is stored to a string and passed out 
+ * with Utils Output.
 **/
 void OnePct::RunSimulationPct(const Configuration& config, MyRandom& random,
                               ofstream& out_stream) {
@@ -279,6 +356,10 @@ void OnePct::RunSimulationPct(const Configuration& config, MyRandom& random,
 }
 
 /****************************************************************
+* Function 'RunSimulationPct2'
+* This function is called by RunSimulationPct, and is used to simulate the 
+* actual process of moving lines of generated voters through the voting 
+* stations and storing their wait times.
 *
 **/
 void OnePct::RunSimulationPct2(int stations_count) {
@@ -355,6 +436,13 @@ void OnePct::RunSimulationPct2(int stations_count) {
 }  // void Simulation::RunSimulationPct2()
 
 /****************************************************************
+ * Function 'ToString' 
+ * This is a standard ToString function.  
+ * This function formats simulated and expected voter turnout, voters per hour,
+ * number of polling stations and minority data to a string s. This function then
+ * iterates through the stations_to_histo_ map and formats the data contained to
+ * string s.  Lastly, this function returns string s.
+ *
 **/
 string OnePct::ToString() {
   string s = "";
@@ -379,6 +467,11 @@ string OnePct::ToString() {
 }  // string OnePct::ToString()
 
 /****************************************************************
+ * Function 'ToStringVoterMap'
+ * This function takes in a multimap of instances of OneVoter.  This function
+ * then iterates through the map of voters, calling ToString on each instance of
+ * OneVoter and storing the output in string s.  Lastly, this function returns
+ * string s.
 **/
 string OnePct::ToStringVoterMap(string label, multimap<int, OneVoter> themap) {
   string s = "";
